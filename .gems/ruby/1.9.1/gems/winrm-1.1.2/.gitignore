@@ -1,7 +1,0 @@
-*.swp
-*.gem
-pkg/*
-.rvmrc
-test/spec/creds*.json
-test/config.yml
-traces/
