@@ -1,8 +1,9 @@
 #!/bin/bash
 
-host="$1"
+HOST="$1"
+: ${DEPLOY_USER:=$USER}
 
-tar cj . | ssh -o 'StrictHostKeyChecking no' "$host" '
+tar cj . | ssh -o 'StrictHostKeyChecking no' "$DEPLOY_USER@$HOST" '
     sudo rm -rf ~/chef &&
     mkdir ~/chef &&
     cd ~/chef &&
