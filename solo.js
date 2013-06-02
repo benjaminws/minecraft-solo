@@ -3,7 +3,7 @@
     "minecraft":{
       "motd": "Welcome all griefers!",
       "max-players": 9001,
-      "ops": ["benjaminws", "GageRampage"],
+      "ops": [""],
       "xms": "768M",
       "xmx": "768M"
     }
