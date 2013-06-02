@@ -12,6 +12,9 @@ Something things you'll need to get started:
   * Chef installed on the above server
   * Patience
 
+Note that I hope to get RHEL support soon, but feel free to help
+(https://github.com/benjaminws/minecraft-solo/issues/2)
+
 Install Chef on the server
 --------------------------
 
@@ -35,7 +38,17 @@ Configuring
 
 Basically this repo is just a way to deploy the chef-minecraft cookbook easily with
 chef-solo. Any attribute for that cookbook, found here:
+
 https://github.com/gregf/cookbook-minecraft/blob/master/attributes/default.rb,
-can be set in the `solo.js`. Most importantly, you'll probably need an
-operator or two defined. You may also need to define how much memory to
-allocate to the jvm.
+
+can be set in the `solo.js`.
+
+Additionally, any attribute here:
+
+http://www.minecraftwiki.net/wiki/Server.properties
+
+can be set in `solo.js` as well.
+
+Most importantly, you'll probably need an operator or two defined. You
+may also need to define how much memory you wish to allocate the JVM. On a 1G
+machine, 768MB should be plenty for a few users with conservative setting.
