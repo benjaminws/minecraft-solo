@@ -1,0 +1,6 @@
+<% if node['minecraft']['banned-ips'].length > 0 -%>
+<%   node['minecraft']['banned-ips'].each do |device| -%>
+<%=    node['minecraft']['banned-ips'] %>
+<%   end -%>
+<% end -%>
+

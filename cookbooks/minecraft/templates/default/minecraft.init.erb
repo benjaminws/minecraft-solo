@@ -1,0 +1,106 @@
+#!/bin/sh
+### BEGIN INIT INFO
+# Provides: Minecraft server
+# Required-Start: $local_fs $remote_fs
+# Required-Stop:  $local_fs $remote_fs
+# Should-Start:   $network
+# Should-Stop:    $network
+# Default-Start:  2 3 4 5
+# Default-Stop:   0 1 6
+# Short-Description:  Minecraft server
+# Description:  Starts the minecraft server
+### END INIT INFO
+
+# Author: Greg Fitzgerald <greg@gregf.org>
+
+# Settings
+PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+USER="<%= node['minecraft']['user'] %>"
+SOCKET="/tmp/tmux-minecraft"
+MCJAR="<%= node['minecraft']['jar'] %>"
+XMS="<%= node['minecraft']['xms'] %>"
+XMX="<%= node['minecraft']['xmx'] %>"
+PIDFILE="<%= node['minecraft']['pid'] %>"
+HOME="<%= node['minecraft']['install_dir'] %>"
+NAME="Minecraft Server"
+SHUTDOWN_DELAY="30"
+
+[ -e $HOME/$MCJAR ] || exit 0
+
+set -e
+
+. /lib/lsb/init-functions
+
+isrunning() {
+  ps ax | grep -Ev "tmux|sh|grep" | grep $MCJAR > /dev/null
+  return $?
+}
+
+start() {
+  if [ !isrunning ]; then
+    start-stop-daemon \
+    --oknodo \
+    --start \
+    --make-pidfile \
+    --pidfile $PIDFILE \
+    --chdir $HOME \
+    --chuid $USER \
+    --exec /usr/bin/tmux -- -S $SOCKET new-session -n minecraft -d "java -server -Xincgc -Xms$XMS -Xmx$XMX -Djava.net.preferIPv4Stack=true -jar $MCJAR nogui"
+  fi
+}
+
+stop() {
+  if isrunning; then
+    tmux -S $SOCKET -q send "say Server going down in $SHUTDOWN_DELAY seconds"  C-m > /dev/null
+    sleep $SHUTDOWN_DELAY
+    tmux -S $SOCKET -q send "stop" C-m > /dev/null
+  fi
+
+  sleep 5
+
+  if isrunning; then
+     echo "$NAME failed to stop, trying to force a shutdown"
+     minecraftPID=`ps ax | grep -Ev "grep|tmux|sh" $MCJAR`
+     kill ${minecraftPID:0:5}
+  fi
+
+  sleep 2
+
+  if isrunning; then
+    echo "Was unable to kill $NAME"
+  else
+    echo "Sucessfully killed $NAME"
+  fi
+}
+
+case "$1" in
+  start)
+    echo -n "Starting $NAME: "
+    start
+    echo "$NAME."
+    ;;
+  stop)
+    echo -n "Stopping $NAME: "
+    stop
+    echo "$NAME."
+    ;;
+  restart)
+    echo -n "Restarting $NAME: "
+    stop
+    echo "$NAME."
+    start
+    ;;
+  status)
+    if isrunning; then
+      echo "$NAME is running"
+      exit 0
+    else
+      echo "$NAME is not running"
+      exit 1
+    fi
+    ;;
+  *)
+    echo "Usage: $NAME {start|stop|restart|status}" >&2
+    exit 1
+    ;;
+esac

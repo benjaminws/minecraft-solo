@@ -1,0 +1,34 @@
+{
+  "name": "minecraft",
+  "description": "Installs/Configures minecraft server",
+  "long_description": "#Minecraft [![Build Status](https://secure.travis-ci.org/gregf/cookbook-minecraft.png)](http://travis-ci.org/gregf/cookbook-minecraft)\n\n##Description\n\nInstalls vanilla [Minecraft](http://www.minecraft.net) server.\n\n##Requirements\n\nRequires the [java](http://community.opscode.com/cookbooks/java) and [tmux](http://community.opscode.com/cookbooks/tmux) cookbooks.\n\n###Platform\n\n* Debian, Ubuntu\n\n##Attributes\n\nSee `attributes/default.rb` for default values.\n\n* `default['minecraft']['user']`\n* `default['minecraft']['install_dir']`\n* `default['minecraft']['base_url']`\n* `default['minecraft']['jar']`\n\n* `default['minecraft']['banned-ips']`\n* `default['minecraft']['banned-players']`\n* `default['minecraft']['white-list-users']`\n* `default['minecraft']['ops']`\n\n* `default['minecraft']['allow-nether']`\n* `default['minecraft']['level-name']`\n* `default['minecraft']['enable-query']`\n* `default['minecraft']['allow-flight']`\n* `default['minecraft']['server-port']`\n* `default['minecraft']['level-type']`\n* `default['minecraft']['enable_rcon']`\n* `default['minecraft']['level-seed']`\n* `default['minecraft']['server-ip']`\n* `default['minecraft']['max-build-height']`\n* `default['minecraft']['spawn-npcs']`\n* `default['minecraft']['white-list']`\n* `default['minecraft']['spawn-animals'] `\n* `default['minecraft']['online-mode']`\n* `default['minecraft']['pvp']`\n* `default['minecraft']['difficulty']`\n* `default['minecraft']['gamemode']`\n* `default['minecraft']['max-players']`\n* `default['minecraft']['spawn-monsters']`\n* `default['minecraft']['generate-structures']`\n* `default['minecraft']['view-distance']`\n* `default['minecraft']['motd']`\n\n##Usage\n\nInclude the `minecraft` recipe and modify your run list and set any attributes\nyou would like changed.\n\n    run_list [\n      \"recipe[minecraft]\"\n    ]\n    \"minecraft\":{\n      \"motd\": \"Welcome all griefers!\"\n      \"max-players\": 9001\n      \"ops\": [\"nappa\", \"goku\"]\n    }\n\n\n##Recipes\n\n###default\n\nInclude the default recipe into your run_list to install `minecraft` server.\nConfiguration files are prepopulated based on values in attributes. I will keep\nthe defaults in sync with upstream.\n\n##TODO\n\n* Clean up attributes\n* Test kitchen\n* Bukkit support or just wait for 1.5?\n\n##License\n\nCopyright 2012, Greg Fitzgerald\nPermission is hereby granted, free of charge, to any person obtaining\na copy of this software and associated documentation files (the\n\"Software\"), to deal in the Software without restriction, including\nwithout limitation the rights to use, copy, modify, merge, publish,\ndistribute, sublicense, and/or sell copies of the Software, and to\nthe following conditions:\npermit persons to whom the Software is furnished to do so, subject to\n\nThe above copyright notice and this permission notice shall be\nincluded in all copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND,\nEXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF\nMERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND\nNONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE\nLIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION\nOF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION\nWITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.\n\n",
+  "maintainer": "Greg Fitzgerald",
+  "maintainer_email": "greg@gregf.org",
+  "license": "MIT",
+  "platforms": {
+    "debian": ">= 0.0.0",
+    "ubuntu": ">= 0.0.0"
+  },
+  "dependencies": {
+    "java": ">= 0.0.0",
+    "tmux": ">= 0.0.0"
+  },
+  "recommendations": {
+  },
+  "suggestions": {
+  },
+  "conflicting": {
+  },
+  "providing": {
+  },
+  "replacing": {
+  },
+  "attributes": {
+  },
+  "groupings": {
+  },
+  "recipes": {
+    "minecraft": "Installs and configures minecraft server."
+  },
+  "version": "0.0.2"
+}
