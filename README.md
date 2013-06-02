@@ -8,7 +8,7 @@ Getting Started
 
 Something things you'll need to get started:
 
-  * A small server/vps (something with at least 1G of RAM)
+  * A smallish debian/ubuntu instance (something with at least 1G of RAM)
   * Chef installed on the above server
   * Patience
 
