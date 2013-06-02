@@ -3,6 +3,7 @@
 HOST="$1"
 : ${DEPLOY_USER:=$USER}
 
+echo "Running chef-solo with the contents of this repo on $DEPLOY_USER@$HOST"
 tar cj . | ssh -o 'StrictHostKeyChecking no' "$DEPLOY_USER@$HOST" '
     sudo rm -rf ~/chef &&
     mkdir ~/chef &&
