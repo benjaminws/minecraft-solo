@@ -22,6 +22,20 @@ Follow the recommended instructions for your sever here:
 
 http://www.opscode.com/chef/install/
 
+Install the needed gems
+-----------------------
+
+This assumes you use a version manager like rbenv, rvm, or some other thing that is
+probably wrong.
+
+    $ gem install bundler
+    $ bundle install
+
+Install the needed cookbooks
+----------------------------
+
+    $ bundle exec berks install --path ./cookbooks
+
 Deploy the chef-solo stuff and run chef-solo
 ---------------------------------------------
 
